@@ -113,6 +113,12 @@ public class Player {
 		}
 	}
 
+	public void setTeam(byte teamId) throws IllegalStateException {
+
+			playerInfo.setTeamId(teamId);
+
+	}
+
 	public EPlayerState getState() {
 		return state;
 	}

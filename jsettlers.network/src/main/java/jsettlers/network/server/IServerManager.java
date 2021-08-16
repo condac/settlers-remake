@@ -59,6 +59,8 @@ public interface IServerManager {
 
 	void setReadyStateForPlayer(Player player, boolean ready);
 
+	void setTeamForPlayer(Player player, byte teamId);
+
 	void sendMatchesToPlayer(Player player);
 
 	void setStartFinished(Player player, boolean startFinished);

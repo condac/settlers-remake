@@ -42,4 +42,6 @@ public interface IMultiplayerPlayer {
 	boolean isReady();
 
 	/* getTeam() */
+
+	byte getTeamId();
 }

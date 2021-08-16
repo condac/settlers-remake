@@ -139,7 +139,7 @@ public class MultiplayerGame {
 
 		byte i = 0;
 		for (; i < playersList.getItems().size(); i++) {
-			playerSettings[i] = new PlayerSetting(i);
+			playerSettings[i] = new PlayerSetting(playersList.getItems().get(i).getTeamId());
 		}
 
 		EPlayerType aiType = iAmTheHost ? EPlayerType.AI_VERY_HARD : EPlayerType.HUMAN;
@@ -209,6 +209,8 @@ public class MultiplayerGame {
 			return ENetworkMessage.UNAUTHORIZED;
 		case READY_STATE_CHANGED:
 			return ENetworkMessage.READY_STATE_CHANGED;
+		case IDENTIFY_USER_CHANGED:
+			return ENetworkMessage.IDENTIFY_USER_CHANGED;
 		case UNKNOWN_ERROR:
 		default:
 			return ENetworkMessage.UNKNOWN_ERROR;
@@ -239,8 +241,8 @@ public class MultiplayerGame {
 			}
 
 			@Override
-			public void setReady(boolean ready) {
-				networkClient.setReadyState(ready);
+			public void setReady(boolean ready, byte teamId) {
+				networkClient.setReadyState(ready, teamId);
 			}
 
 			@Override

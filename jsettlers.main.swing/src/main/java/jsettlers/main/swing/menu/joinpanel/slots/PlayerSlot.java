@@ -145,7 +145,7 @@ public class PlayerSlot {
 		readyButton.addActionListener(e -> {
 			setReady(!isReady());
 			if (gameToBeInformedAboutReady != null) {
-				gameToBeInformedAboutReady.setReady(isReady());
+				gameToBeInformedAboutReady.setReady(isReady(), getTeam());
 			}
 		});
 	}
