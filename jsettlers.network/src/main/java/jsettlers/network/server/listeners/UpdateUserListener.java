@@ -46,6 +46,7 @@ public class UpdateUserListener extends PacketChannelListener<PlayerInfoPacket> 
 	@Override
 	protected void receivePacket(ENetworkKey key, PlayerInfoPacket playerInfo) throws IOException {
 		serverManager.setTeamForPlayer(player, playerInfo.getTeamId());
+		serverManager.setCivilisationForPlayer(player, playerInfo.getCivilisation());
 	}
 
 }

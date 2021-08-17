@@ -118,6 +118,10 @@ public class Player {
 			playerInfo.setTeamId(teamId);
 
 	}
+	
+	public void setCivilisation(byte civ) throws IllegalStateException {
+			playerInfo.setCivilisation(civ);
+	}
 
 	public EPlayerState getState() {
 		return state;

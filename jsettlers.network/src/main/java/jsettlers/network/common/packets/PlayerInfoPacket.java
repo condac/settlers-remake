@@ -31,15 +31,18 @@ public class PlayerInfoPacket extends Packet {
 	private boolean ready;
 	private boolean startFinished;
 	private byte teamId;
+	private byte civ;
 
 	public PlayerInfoPacket() {
 	}
 
-	public PlayerInfoPacket(String id, String name, boolean ready, byte teamId) {
+	public PlayerInfoPacket(String id, String name, boolean ready, byte teamId, byte civIn) {
 		this.id = id;
 		this.name = name;
 		this.ready = ready;
 		this.teamId = teamId;
+		this.civ = civIn;
+		
 	}
 
 	@Override
@@ -49,6 +52,7 @@ public class PlayerInfoPacket extends Packet {
 		dos.writeBoolean(ready);
 		dos.writeBoolean(startFinished);
 		dos.writeByte(teamId);
+		dos.writeByte(civ);
 	}
 
 	@Override
@@ -58,6 +62,7 @@ public class PlayerInfoPacket extends Packet {
 		ready = dis.readBoolean();
 		startFinished = dis.readBoolean();
 		teamId = dis.readByte();
+		civ = dis.readByte();
 	}
 
 	public String getId() {
@@ -71,13 +76,23 @@ public class PlayerInfoPacket extends Packet {
 	public byte getTeamId() {
 		return teamId;
 	}
-
+	
+	public byte getCivilisation() {
+		return civ;
+		
+	}
+	
 	public void setReady(boolean ready) {
 		this.ready = ready;
 	}
 
 	public void setTeamId(byte teamId) {
 		this.teamId = teamId;
+	}
+
+	public void setCivilisation(byte civIn) {
+		this.civ = civIn;
+		
 	}
 
 	public boolean isReady() {

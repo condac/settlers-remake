@@ -195,6 +195,16 @@ public class ServerManager implements IServerManager {
 	}
 
 	@Override
+	public void setCivilisationForPlayer(Player player, byte civ) {
+		try {
+			player.setCivilisation(civ);
+		} catch (IllegalStateException e) {
+			player.sendPacket(NetworkConstants.ENetworkKey.REJECT_PACKET,
+					new RejectPacket(NetworkConstants.ENetworkMessage.INVALID_STATE_ERROR, NetworkConstants.ENetworkKey.CHANGE_READY_STATE));
+		}
+	}
+
+	@Override
 	public void sendMatchesToPlayer(Player player) {
 		matchSendingTask.sendMatchesTo(player);
 	}

@@ -371,6 +371,7 @@ public class JoinGamePanel extends BackgroundPanel {
 				playerSlot.setPlayerName(player.getName());
 				playerSlot.setPlayerType(EPlayerType.HUMAN, false);
 				playerSlot.setTeam(player.getTeamId());
+				playerSlot.setCivilisation(player.getCivilisation(), true);
 				playerSlot.setReady(player.isReady());
 				if (player.getId().equals(myId)) {
 					playerSlot.setReadyButtonEnabled(true);
@@ -428,11 +429,11 @@ public class JoinGamePanel extends BackgroundPanel {
 			}
 
 			if (playerSetting.getCivilisation() != null) {
-				playerSlot.setCivilisation(playerSetting.getCivilisation(), false);
+				playerSlot.setCivilisation(playerSetting.getCivilisation(), true);
 			}
 
 			if (playerSetting.getPlayerType() != null) {
-				playerSlot.setPlayerType(playerSetting.getPlayerType(), false);
+				playerSlot.setPlayerType(playerSetting.getPlayerType(), true);
 			}
 		}
 	}

@@ -60,6 +60,8 @@ public interface IServerManager {
 	void setReadyStateForPlayer(Player player, boolean ready);
 
 	void setTeamForPlayer(Player player, byte teamId);
+	
+	void setCivilisationForPlayer(Player player, byte civ);
 
 	void sendMatchesToPlayer(Player player);
 

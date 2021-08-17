@@ -139,7 +139,7 @@ public class MultiplayerGame {
 
 		byte i = 0;
 		for (; i < playersList.getItems().size(); i++) {
-			playerSettings[i] = new PlayerSetting(playersList.getItems().get(i).getTeamId());
+			playerSettings[i] = new PlayerSetting(EPlayerType.HUMAN, playersList.getItems().get(i).getCivilisation(), playersList.getItems().get(i).getTeamId());
 		}
 
 		EPlayerType aiType = iAmTheHost ? EPlayerType.AI_VERY_HARD : EPlayerType.HUMAN;
@@ -241,8 +241,8 @@ public class MultiplayerGame {
 			}
 
 			@Override
-			public void setReady(boolean ready, byte teamId) {
-				networkClient.setReadyState(ready, teamId);
+			public void setReady(boolean ready, byte teamId, byte civ) {
+				networkClient.setReadyState(ready, teamId, civ);
 			}
 
 			@Override
