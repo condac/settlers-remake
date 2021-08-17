@@ -142,10 +142,10 @@ public class MultiplayerGame {
 			playerSettings[i] = new PlayerSetting(EPlayerType.HUMAN, playersList.getItems().get(i).getCivilisation(), playersList.getItems().get(i).getTeamId());
 		}
 
-		EPlayerType aiType = iAmTheHost ? EPlayerType.AI_VERY_HARD : EPlayerType.HUMAN;
+		EPlayerType aiType = iAmTheHost ? EPlayerType.AI_VERY_HARD : EPlayerType.HUMAN;  // Here is where you set AI difficulty for static settings in compile
 
 		for (; i < availablePlayers.length; i++) {
-			playerSettings[i] = new PlayerSetting(aiType, ECivilisation.ROMAN, i);
+			playerSettings[i] = new PlayerSetting(aiType, ECivilisation.ROMAN, i); // set this do (byte)1 to set AI to team 2
 		}
 
 		return playerSettings;
