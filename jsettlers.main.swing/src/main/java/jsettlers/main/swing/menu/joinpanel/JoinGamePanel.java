@@ -425,7 +425,7 @@ public class JoinGamePanel extends BackgroundPanel {
 			if (playerSetting.getTeamId() != null) {
 				playerSlot.setTeam(playerSetting.getTeamId(), false);
 			} else {
-				playerSlot.setTeam((byte)0);
+				playerSlot.setTeam(i);
 			}
 
 			if (playerSetting.getCivilisation() != null) {
