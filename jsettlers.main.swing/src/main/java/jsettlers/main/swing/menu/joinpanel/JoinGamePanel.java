@@ -380,7 +380,7 @@ public class JoinGamePanel extends BackgroundPanel {
 				}
 			}
 			for (int i = players.size(); i < playerSlots.size(); i++) {
-				playerSlots.get(i).setPlayerType(EPlayerType.AI_VERY_HARD, false);
+				playerSlots.get(i).setPlayerType(EPlayerType.AI_VERY_HARD, true);
 				playerSlots.get(i).setTeam((byte)i);
 			}
 			setCancelButtonActionListener(e -> {
