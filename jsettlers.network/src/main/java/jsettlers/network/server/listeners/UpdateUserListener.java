@@ -12,77 +12,41 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  *******************************************************************************/
-package jsettlers.main.datatypes;
+package jsettlers.network.server.listeners;
 
-import jsettlers.common.menu.IMultiplayerPlayer;
+import java.io.IOException;
+
+import jsettlers.network.NetworkConstants;
+import jsettlers.network.NetworkConstants.ENetworkKey;
 import jsettlers.network.common.packets.PlayerInfoPacket;
-import jsettlers.common.player.ECivilisation;
+import jsettlers.network.infrastructure.channel.Channel;
+import jsettlers.network.infrastructure.channel.GenericDeserializer;
+import jsettlers.network.infrastructure.channel.listeners.PacketChannelListener;
+import jsettlers.network.infrastructure.channel.packet.EmptyPacket;
+import jsettlers.network.infrastructure.channel.reject.RejectPacket;
+import jsettlers.network.server.IServerManager;
+import jsettlers.network.server.match.Player;
+
 /**
- * 
+ *
  * @author Andreas Eberle
- * 
+ *
  */
-public class MultiplayerPlayer implements IMultiplayerPlayer {
+public class UpdateUserListener extends PacketChannelListener<PlayerInfoPacket> {
 
-	private final String id;
-	private final String name;
-	private final boolean ready;
-	private final byte teamId;
-	private final ECivilisation civ;
+	private final IServerManager serverManager;
+	private final Player player;
 
-	public MultiplayerPlayer(PlayerInfoPacket playerInfoPacket) {
-		this.id = playerInfoPacket.getId();
-		this.name = playerInfoPacket.getName();
-		this.ready = playerInfoPacket.isReady();
-		this.teamId = playerInfoPacket.getTeamId();
-		
-		switch (playerInfoPacket.getCivilisation()) {
-			case 1:
-				this.civ = ECivilisation.ROMAN;
-				break;
-			case 2:
-				this.civ = ECivilisation.EGYPTIAN;
-				break;
-			case 3:
-				this.civ = ECivilisation.ASIAN;
-				break;
-			case 4:
-				this.civ = ECivilisation.AMAZON;
-				break;
-			default:
-				this.civ = ECivilisation.ROMAN;
-				break;
-		}
-	
+	public UpdateUserListener(IServerManager serverManager, Player player) {
+		super(ENetworkKey.CHANGE_IDENTIFY_USER, new GenericDeserializer<>(PlayerInfoPacket.class));
+		this.serverManager = serverManager;
+		this.player = player;
 	}
 
 	@Override
-	public String getId() {
-		return id;
+	protected void receivePacket(ENetworkKey key, PlayerInfoPacket playerInfo) throws IOException {
+		serverManager.setTeamForPlayer(player, playerInfo.getTeamId());
+		serverManager.setCivilisationForPlayer(player, playerInfo.getCivilisation());
 	}
 
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public boolean isReady() {
-		return ready;
-	}
-
-	@Override
-	public byte getTeamId() {
-		return teamId;
-	}
-	
-	@Override
-	public ECivilisation getCivilisation() {
-		return civ;
-	}
-
-	@Override
-	public String toString() {
-		return "MultiplayerPlayer [id=" + id + ", name=" + name + ", ready=" + ready + "]";
-	}
 }

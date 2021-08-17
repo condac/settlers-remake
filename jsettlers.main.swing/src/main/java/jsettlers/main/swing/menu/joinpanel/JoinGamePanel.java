@@ -370,6 +370,8 @@ public class JoinGamePanel extends BackgroundPanel {
 				IMultiplayerPlayer player = players.get(i);
 				playerSlot.setPlayerName(player.getName());
 				playerSlot.setPlayerType(EPlayerType.HUMAN, false);
+				playerSlot.setTeam(player.getTeamId());
+				playerSlot.setCivilisation(player.getCivilisation(), true);
 				playerSlot.setReady(player.isReady());
 				if (player.getId().equals(myId)) {
 					playerSlot.setReadyButtonEnabled(true);
@@ -379,7 +381,8 @@ public class JoinGamePanel extends BackgroundPanel {
 				}
 			}
 			for (int i = players.size(); i < playerSlots.size(); i++) {
-				playerSlots.get(i).setPlayerType(EPlayerType.AI_VERY_HARD, false);
+				playerSlots.get(i).setPlayerType(EPlayerType.AI_VERY_HARD, true);
+				playerSlots.get(i).setTeam((byte)i);
 			}
 			setCancelButtonActionListener(e -> {
 				joinMultiPlayerMap.abort();
@@ -422,15 +425,15 @@ public class JoinGamePanel extends BackgroundPanel {
 			if (playerSetting.getTeamId() != null) {
 				playerSlot.setTeam(playerSetting.getTeamId(), false);
 			} else {
-				playerSlot.setTeam(i);
+				playerSlot.setTeam((byte)0);
 			}
 
 			if (playerSetting.getCivilisation() != null) {
-				playerSlot.setCivilisation(playerSetting.getCivilisation(), false);
+				playerSlot.setCivilisation(playerSetting.getCivilisation(), true);
 			}
 
 			if (playerSetting.getPlayerType() != null) {
-				playerSlot.setPlayerType(playerSetting.getPlayerType(), false);
+				playerSlot.setPlayerType(playerSetting.getPlayerType(), true);
 			}
 		}
 	}

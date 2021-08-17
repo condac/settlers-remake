@@ -113,6 +113,16 @@ public class Player {
 		}
 	}
 
+	public void setTeam(byte teamId) throws IllegalStateException {
+
+			playerInfo.setTeamId(teamId);
+
+	}
+	
+	public void setCivilisation(byte civ) throws IllegalStateException {
+			playerInfo.setCivilisation(civ);
+	}
+
 	public EPlayerState getState() {
 		return state;
 	}

@@ -159,7 +159,7 @@ public class MapListCellRenderer implements ListCellRenderer<MapLoader> {
 		mapNameLabel.setForeground(FOREGROUND);
 		mapIdLabel.setForeground(FOREGROUND);
 		descriptionLabel.setForeground(FOREGROUND);
-		playerCountLabel.setForeground(Color.BLUE);
+		playerCountLabel.setForeground(Color.WHITE);
 
 		mapNameLabel.setFont(UIDefaults.FONT_SMALL);
 		mapIdLabel.setFont(UIDefaults.FONT_SMALL);

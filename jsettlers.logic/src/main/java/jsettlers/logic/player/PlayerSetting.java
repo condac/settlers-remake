@@ -39,6 +39,9 @@ public class PlayerSetting {
 	/**
 	 * Creates a new {@link PlayerSetting} object for a human player.
 	 */
+	public PlayerSetting(byte teamId, ECivilisation civ ) {
+		this(true, EPlayerType.HUMAN, civ, teamId);
+	}
 	public PlayerSetting(byte teamId) {
 		this(true, EPlayerType.HUMAN, ECivilisation.ROMAN, teamId);
 	}
@@ -145,7 +148,7 @@ public class PlayerSetting {
 		byte offsetToSkipHuman = 0;
 		for (byte i = 0; i < playerSettings.length; i++) {
 			if (i == playerId) {
-				playerSettings[playerId] = new PlayerSetting(i);
+				playerSettings[playerId] = new PlayerSetting(i, ECivilisation.ROMAN);
 			} else {
 				EPlayerType aiType;
 

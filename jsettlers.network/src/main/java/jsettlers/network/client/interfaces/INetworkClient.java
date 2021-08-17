@@ -90,7 +90,7 @@ public interface INetworkClient {
 
 	void startMatch() throws IllegalStateException;
 
-	void setReadyState(boolean ready) throws IllegalStateException;
+	void setReadyState(boolean ready, byte teamId, byte civ) throws IllegalStateException;
 
 	void sendChatMessage(String message) throws IllegalStateException;
 

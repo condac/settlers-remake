@@ -145,7 +145,7 @@ public class PlayerSlot {
 		readyButton.addActionListener(e -> {
 			setReady(!isReady());
 			if (gameToBeInformedAboutReady != null) {
-				gameToBeInformedAboutReady.setReady(isReady());
+				gameToBeInformedAboutReady.setReady(isReady(), getTeam(), getCivilisationByte());
 			}
 		});
 	}
@@ -230,6 +230,22 @@ public class PlayerSlot {
 
 	public ECivilisation getCivilisation() {
 		return ((CivilisationUiWrapper) civilisationComboBox.getSelectedItem()).getCivilisation();
+	}
+	
+	public byte getCivilisationByte() {
+		switch (getCivilisation()) {
+			
+			case ROMAN:
+				return 1;
+			case EGYPTIAN:
+				return 2;
+			case ASIAN:
+				return 3;
+			case AMAZON:
+				return 4;
+			default:
+				return 1;
+		}
 	}
 
 	public void setSlotListener(ISlotListener slotListener) {

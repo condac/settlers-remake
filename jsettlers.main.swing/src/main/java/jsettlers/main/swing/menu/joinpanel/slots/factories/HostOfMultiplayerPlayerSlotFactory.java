@@ -43,15 +43,18 @@ public class HostOfMultiplayerPlayerSlotFactory implements IPlayerSlotFactory {
 		} else {
 			playerSlot.setPossibleTypes(new EPlayerType[] {
 					EPlayerType.HUMAN,
-					EPlayerType.AI_VERY_HARD
+					EPlayerType.AI_VERY_EASY,
+					EPlayerType.AI_EASY,
+					EPlayerType.AI_HARD,
+				  EPlayerType.AI_VERY_HARD,
 			});
-			playerSlot.setPlayerType(EPlayerType.AI_VERY_HARD, false);
+			playerSlot.setPlayerType(EPlayerType.AI_VERY_HARD, true);
 			playerSlot.setReadyButtonEnabled(false);
 			playerSlot.setReady(true);
 		}
 
 		playerSlot.setSlotAndTeams((byte) mapLoader.getMaxPlayers());
-		playerSlot.disableAllInputs();
+		//playerSlot.disableAllInputs();
 		return playerSlot;
 	}
 }

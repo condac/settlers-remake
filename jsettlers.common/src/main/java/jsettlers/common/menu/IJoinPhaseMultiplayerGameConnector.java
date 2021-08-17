@@ -49,7 +49,7 @@ public interface IJoinPhaseMultiplayerGameConnector {
 	 * 
 	 * @param ready
 	 */
-	void setReady(boolean ready);
+	void setReady(boolean ready, byte teamId, byte civ);
 
 	/**
 	 * Starts the game if all players are currently ready. Calls the game listener as soon as it is starting.

@@ -102,7 +102,7 @@ public class NetworkClient implements ITaskScheduler, INetworkConnector, INetwor
 	public void logIn(String id, String name, IPacketReceiver<ArrayOfMatchInfosPacket> matchesReceiver) throws IllegalStateException {
 		EPlayerState.assertState(state, EPlayerState.CHANNEL_CONNECTED);
 
-		playerInfo = new PlayerInfoPacket(id, name, false);
+		playerInfo = new PlayerInfoPacket(id, name, false, (byte)0, (byte)1);
 
 		channel.registerListener(new IdentifiedUserListener(this));
 		channel.registerListener(generateDefaultListener(NetworkConstants.ENetworkKey.ARRAY_OF_MATCHES, ArrayOfMatchInfosPacket.class,
@@ -150,8 +150,11 @@ public class NetworkClient implements ITaskScheduler, INetworkConnector, INetwor
 	}
 
 	@Override
-	public void setReadyState(boolean ready) throws IllegalStateException {
+	public void setReadyState(boolean ready, byte teamId, byte civ) throws IllegalStateException {
 		EPlayerState.assertState(state, EPlayerState.IN_MATCH);
+		playerInfo.setTeamId(teamId);
+		playerInfo.setCivilisation(civ);
+		channel.sendPacketAsync(NetworkConstants.ENetworkKey.CHANGE_IDENTIFY_USER, playerInfo);
 		channel.sendPacketAsync(NetworkConstants.ENetworkKey.CHANGE_READY_STATE, new BooleanMessagePacket(ready));
 	}
 

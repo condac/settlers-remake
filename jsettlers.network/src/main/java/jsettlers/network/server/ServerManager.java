@@ -30,6 +30,7 @@ import jsettlers.network.server.listeners.ReadyStatePacketListener;
 import jsettlers.network.server.listeners.ServerChannelClosedListener;
 import jsettlers.network.server.listeners.StartFinishedSignalListener;
 import jsettlers.network.server.listeners.TimeSyncForwardingListener;
+import jsettlers.network.server.listeners.UpdateUserListener;
 import jsettlers.network.server.listeners.matches.JoinMatchListener;
 import jsettlers.network.server.listeners.matches.LeaveMatchListener;
 import jsettlers.network.server.listeners.matches.OpenNewMatchListener;
@@ -86,6 +87,7 @@ public class ServerManager implements IServerManager {
 			channel.registerListener(new TimeSyncForwardingListener(this, player));
 			channel.registerListener(new ReadyStatePacketListener(this, player));
 			channel.registerListener(new StartFinishedSignalListener(this, player));
+			channel.registerListener(new UpdateUserListener(this, player));
 
 			return true;
 		} else {
@@ -176,6 +178,26 @@ public class ServerManager implements IServerManager {
 	public void setReadyStateForPlayer(Player player, boolean ready) {
 		try {
 			player.setReady(ready);
+		} catch (IllegalStateException e) {
+			player.sendPacket(NetworkConstants.ENetworkKey.REJECT_PACKET,
+					new RejectPacket(NetworkConstants.ENetworkMessage.INVALID_STATE_ERROR, NetworkConstants.ENetworkKey.CHANGE_READY_STATE));
+		}
+	}
+
+	@Override
+	public void setTeamForPlayer(Player player, byte teamId) {
+		try {
+			player.setTeam(teamId);
+		} catch (IllegalStateException e) {
+			player.sendPacket(NetworkConstants.ENetworkKey.REJECT_PACKET,
+					new RejectPacket(NetworkConstants.ENetworkMessage.INVALID_STATE_ERROR, NetworkConstants.ENetworkKey.CHANGE_READY_STATE));
+		}
+	}
+
+	@Override
+	public void setCivilisationForPlayer(Player player, byte civ) {
+		try {
+			player.setCivilisation(civ);
 		} catch (IllegalStateException e) {
 			player.sendPacket(NetworkConstants.ENetworkKey.REJECT_PACKET,
 					new RejectPacket(NetworkConstants.ENetworkMessage.INVALID_STATE_ERROR, NetworkConstants.ENetworkKey.CHANGE_READY_STATE));

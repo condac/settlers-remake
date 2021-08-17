@@ -14,6 +14,8 @@
  *******************************************************************************/
 package jsettlers.common.menu;
 
+import jsettlers.common.player.ECivilisation;
+
 /**
  * This is a list item of players that joined or can join the game.
  * 
@@ -42,4 +44,9 @@ public interface IMultiplayerPlayer {
 	boolean isReady();
 
 	/* getTeam() */
+
+	byte getTeamId();
+	
+	ECivilisation getCivilisation();
+
 }
